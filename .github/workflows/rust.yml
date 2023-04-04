@@ -3,6 +3,10 @@ name: Build and Post
 on:
   release:
     types: [created]
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 
 jobs:
   release:
@@ -23,7 +27,7 @@ jobs:
       - name: Compile and release
         uses: rust-build/rust-build.action@v1.4.3
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TOKEN: ${{ secrets.TOKEN }}
         with:
           RUSTTARGET: ${{ matrix.target }}
           ARCHIVE_TYPES: ${{ matrix.archive }}
